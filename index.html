@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+    <script type="text/javascript"></script>
+    
+</head>
+<body>
+        <div class="jumbotron">
+                <h1 class="display-4">Word Guess Nightclub edition!</h1>
+                <p class="lead">Guess the name of the best nightclubs in NYC</p>
+                <hr class="my-4">
+                <p>Press any key to begin</p>
+              </div>
+    
+<script>
+
+var gameWords = ["lavo", "marquee", "mirage", "schimanski", "tao"];
+
+
+// Random word
+var word = words[Math.floor(Math.random() * words.length)];
+
+ // Set up the answer array
+ var answerArray = [];
+ for (var i = 0; i < word.length; i++) {
+ answerArray[i] = "_";
+ }
+
+
+
+
+
+// sometimes returns farewell, sometimes goodbye, etc...
+randomWord(["lavo", "marquee", "mirage", "schimanski", "tao" ]);
+
+// sometimes returns bonjour, sometimes hola, etc...
+randomWord(["greetings", "hello", "hola", "bonjour" ])
+
+
+
+</script>
+
+
+</body>
+</html>
