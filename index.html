@@ -23,23 +23,22 @@ var gameWords = ["lavo", "marquee", "mirage", "schimanski", "tao"];
 
 
 // Random word
-var word = words[Math.floor(Math.random() * words.length)];
+var word = gameWords[Math.floor(Math.random() * gameWords.length)];
 
- // Set up the answer array
- var answerArray = [];
- for (var i = 0; i < word.length; i++) {
- answerArray[i] = "_";
- }
+//  // Set up the answer array
+//  var answerArray = [];
+//  for (var i = 0; i < word.length; i++) {
+//  answerArray[i] = "_";
+//  }
+
+// returns true
+isCorrectGuess('lavo', 'a');
+
+// returns false
+isCorrectGuess('lavo', 'b');
 
 
 
-
-
-// sometimes returns farewell, sometimes goodbye, etc...
-randomWord(["lavo", "marquee", "mirage", "schimanski", "tao" ]);
-
-// sometimes returns bonjour, sometimes hola, etc...
-randomWord(["greetings", "hello", "hola", "bonjour" ])
 
 
 
