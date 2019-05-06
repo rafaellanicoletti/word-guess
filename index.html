@@ -79,18 +79,19 @@ function getBlanks (word){
 // Name your function fillBlanks, and have it take three arguments: the word string, the array of the current puzzle state, and the letter that is going to be filled in (arguments in that order).
 
 
-var remainingLetters = word.length;
+// var remainingLetters = word.length;
 
-function fillBlanks (word, puzzle, guess){
-for (var i=0; i < word.length; i++){
-  if (word[i]=== guess) {
-    answerArray[i] = guess;
-    remainingLetters--;
-    
+function fillBlanks (word, puzzle, letter){
+  if (isCorrectGuess(word,letter))  {
+    for (var i=0; i < word.length; i++){
+    if (word[i] === letter) {
+    puzzle[i] = letter;
+      
+      } 
     }
   }
+  return puzzle;
 }
-
 
 
 
