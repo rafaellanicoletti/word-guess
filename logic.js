@@ -116,17 +116,6 @@ function setupRound (word){
 //   wrongGuesses: ["a","t","g","r"],
 //   puzzleState: ["_","_","_","_"]
 // }
-var myRound = setupRound("hello")
-
-myRound ={
-  word: "hello",
-  guessesLeft: 9,
-  wrongGuesses: [],
-  puzzleState: ["_","_","_","_"]
-}
-
-myRound.guessesLeft = myRound.guessesLeft-1
-myRound.puzzleState= ["_","_","_"]
 
 
 function updateRound (round,letter){
@@ -163,9 +152,16 @@ function hasWon (puzzleState) {
 function hasLost (guessesLeft) {
   for (var i = 0; i < guessesLeft.length + 1; i++){
     if (guessesLeft[i] > 9){ 
-      
+      return true
     }
-    
-  }return false
+  } return false
+}
+
+
+// 1.9 - isEndOfRound function
+// Finally, to allow us to know if you need to start a new round, create a function to check if the round is over. Name it isEndOfRound. It should take the round object as an argument, and return true if the round is over, and false otherwise.
+// You'll want to use this function later to trigger starting a new round.
+
+function isEndOfRound (round) {
   
 }
