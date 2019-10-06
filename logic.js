@@ -52,191 +52,116 @@ function fillBlanks(word,puzzleState, letter) {
 //BEGIN GAME MANAGEMENT
  
 
+//New round,  takes a WORD, CREATES & RETURNS OBJECT, 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function to generate array of blanks from word
-function getBlanks(word) {
-  // count the number of letters in the word
-  var letterCount = word.length;
-
-  // Create an array to store the necessary number of blanks
-  var blanks = [];
-
-  // Fill up the puzzleState list with appropriate number of blanks
-  // This is based on number of letters in solution
-  for (var i = 0; i < letterCount; i++) {
-    blanks.push("_");
-  }
-
-  return blanks;
-}
-
-// function to update blanks array with given letter (checks word)
-function fillBlanks(word, puzzleState, letter) {
-  // Loop through the word.
-  for (var i = 0; i < word.length; i++) {
-    // Populate the puzzleState with every instance of the letter.
-    if (word[i] === letter) {
-      // Here we set the specific space in blanks and letter equal to the letter when there is a match.
-      puzzleState[i] = letter;
-    }
-  }
-
-  return puzzleState;
-}
-
-/*************************************************************
- * End utility functions
- *************************************************************/
-
-/*************************************************************
- * Begin functions for game management
- *************************************************************/
-
-// setupRound new "round" - takes a word, creates and returns an object with the word, the blanks array equivalent, number of guesses, and an array of wrong guesses
-function setupRound(word) {
-  var blanks = getBlanks(word);
+function setupRound(word) { 
+  var blanks= getBlanks(word);
 
   return {
-    word: word,
-    guessesLeft: 9,
+    word:word,
+    guessesLeft: 9, 
     wrongGuesses: [],
     puzzleState: blanks
   };
 }
 
-// all the code that needs to be run after each guess is made
+
 function updateRound(round, letterGuessed) {
-  // if the letter exists in the word
   if (isCorrectGuess(round.word, letterGuessed)) {
-    // update based on the new puzzleState
     round.puzzleState = fillBlanks(round.word, round.puzzleState, letterGuessed);
   } else {
-    // then we add the letter to the list of wrong letters, and we subtract one of the guesses.
     round.wrongGuesses.push(letterGuessed);
-    round.guessesLeft -= 1;
+    round.guessesLeft -=1;
   }
 }
 
-// check if word is complete
-function hasWon(puzzleState) {
+//check if word is complete
+
+function hasWon(puzzleState) { 
   return puzzleState.indexOf("_") === -1;
 }
 
-// check if lost
-function hasLost(guessesLeft) {
+//check if lost
+function hasLost(guessesLeft) { 
   return guessesLeft === 0;
 }
 
-// check if round is over
-function isEndOfRound(round) {
+//check if round is over
+function isEndOfRound(round){
   return hasWon(round.puzzleState) || hasLost(round.guessesLeft);
 }
 
-// setupGame new "game" - create and return an object with the array of words, set wins + losses, generate a new round
 function setupGame(words, wins, losses) {
   var round = setupRound(randomWord(words));
 
   return {
     words: words,
-    wins: wins,
+    wins: wins, 
     losses: losses,
     round: round
   };
 }
 
-// update game state with win/loss info, trigger new setup
+
+//update game with win/loss info
+
 function startNewRound(game) {
   var currentRound = game.round;
 
-  if (hasWon(currentRound.puzzleState)) {
+  if(hasWon(currentRound.puzzleState)) {
     game.wins += 1;
     alert("You won! The word was " + currentRound.word);
-  } else if (hasLost(currentRound.guessesLeft)) {
+  }else if (hasLost(currentRound.guessesLeft)) {
     game.losses += 1;
-    alert("You lost :( The word was " + currentRound.word);
+    alert("You lost :(! The word was " + currentRound.word);
   }
-
-  game.round = setupRound(randomWord(game.words));
 }
 
-// start the game
+
+//starGame
 var myGame = setupGame(gameWords, 0, 0);
 
-/*************************************************************
- * End game management functions
- *************************************************************/
 
-/*************************************************************
- * Begin page management functions
- *************************************************************/
+//BEGIN PAGE MANAGEMENT FUNCTIONS! 
 
-// function to update page with all relevant values
 function updatePage(game) {
   document.getElementById("guesses-left").innerHTML = game.round.guessesLeft;
 
-  // This will print the array of guesses and blanks onto the page.
-  document.getElementById("puzzle-state").innerHTML = game.round.puzzleState.join(" ");
+//print the array of guesses and blanks to the page
+  document.getElementById("puzzle-state").innerHTML = 
+  game.rouns.puzzleState.join(" ");
 
-  // This will print the wrong guesses onto the page.
-  document.getElementById("wrong-guesses").innerHTML = game.round.wrongGuesses.join(" ");
+  document.getElementById("wrong-guesses").innerHTML = 
+  game.round.wrongGuesses.join(" ");
 
-  // This will print the # wins onto the page
   document.getElementById("win-counter").innerHTML = game.wins;
 
-  // This will print the # losses onto the page
   document.getElementById("loss-counter").innerHTML = game.losses;
 }
 
-// function to handle keypress
-document.onkeyup = function handleKeypress(event) {
-  // Check if the key pressed is a letter
-  if (event.keyCode >= 65 && event.keyCode <= 90) {
-    // Converts all key clicks to lowercase letters
+document.onkeyup = function handleKeypress(event) { 
+
+  if(event.keyCode >= 65 && event.keyCode <=90) {
     var letterGuessed = event.key.toLowerCase();
 
-    // use letter guessed and last known round state to generate new game state
     updateRound(myGame.round, letterGuessed);
 
-    // check if win/loss condition is met, and alert/end gameState, choose new word, and update page
-    if (isEndOfRound(myGame.round)) {
+    if(isEndOfRound(myGame.round)) { 
       startNewRound(myGame);
     }
 
-    // update what's shown on the page
     updatePage(myGame);
   }
+
 };
 
-// on page load, set up info
 updatePage(myGame);
 
-/*************************************************************
- * End page management functions
- *************************************************************/
+
+
+
+
+
 
 
 
